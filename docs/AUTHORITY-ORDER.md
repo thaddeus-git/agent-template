@@ -7,12 +7,12 @@
 | 1 | Agent execution prompts | `.claude/agents/` * | Runtime truth — what agents actually execute |
 | 2 | Runtime context docs | `.claude/context/` * | Live configuration injected at task start |
 | 3 | Code (schema + state machine) | `src/` * | Machine truth |
-
-\* Not present in the empty template — create these directories when you add your first agent, skill, or runtime code. Until they exist, the order skips them.
 | 4 | Architecture model | `docs/architecture/likec4/` | Structural source of truth (components, boundaries, relationships) |
 | 5 | ADRs | `docs/adr/` | Historical decisions; superseded ADRs are kept for audit but lose authority |
 | 6 | How-to runbooks | `docs/how-to/` | Operator recipes; may lag code changes |
 | 7 | External-API references | `docs/references/` | Third-party contracts — pinned to the API version in use |
+
+\* Not present in the empty template — create these directories when you add your first agent, skill, or runtime code. Until they exist, the order skips them.
 
 > **Intake is not in the authority order.** An intake (`docs/intake/`)
 > is a design-time seed for the artifacts above. Once the ADR, LikeC4
