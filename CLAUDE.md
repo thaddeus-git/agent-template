@@ -26,21 +26,26 @@ The flow:
 4. **LikeC4** ([`docs/architecture/likec4/`](docs/architecture/likec4/)) — Claude updates the structural model.
 5. **Code** — only now write the agent prompt, skill, or CLI.
 
-If a request arrives without an intake, the first response is *"let's fill in `docs/intake/<name>.md` first"*, not code.
+For new features, agents, or skills, if a request arrives without an intake, the first response is *"let's fill in `docs/intake/<name>.md` first"*, not code. Bug fixes, doc edits, and small chores skip the intake step.
 
 ## Project Invariants
 
 These are session-critical rules. Violating one breaks the harness contract — fix the violation, do not weaken the rule.
 
-- **State lives on the row, not the agent.** Workers are stateless; re-derive stage from the row each invocation.
-- **The DB is the only durable pipeline state.** Skill output is transient — the agent must persist after each stage.
+- **The LikeC4 model is structural canon — auto-imported every session. Do not autonomously edit it as part of a bug fix.** If a fix requires a model change, stop and ask the human.
+- **When sources disagree, follow [docs/AUTHORITY-ORDER.md](docs/AUTHORITY-ORDER.md).**
+
+### Suggested invariants — replace per project
+
+The agent-sdr project layers these on top of the universal invariants. Adopt the ones that fit your project's shape; delete or replace the ones that don't.
+
+- **State lives on the row, not the agent.** Workers are stateless; re-derive stage from the row each invocation. *(Applies if you have a pipeline DB.)*
+- **The DB is the only durable pipeline state.** Skill output is transient — the agent must persist after each stage. *(Applies if you have a pipeline DB.)*
 - **Three primitives only — CLI / Skill / Agent.** Pick by *does the inner loop need an LLM call?*
   - **CLI** — no LLM. Deterministic shell or TypeScript.
   - **Skill** — pure LLM transform. No DB or network I/O inside the skill body.
   - **Agent** — LLM driver that orchestrates I/O and invokes Skills.
 - **External side-effects are declared in the agent's `side_effects:` frontmatter — never inferred.** Mirrors the LikeC4 `#side-effect-external` tag.
-- **The LikeC4 model is structural canon — auto-imported every session. Do not autonomously edit it as part of a bug fix.** If a fix requires a model change, stop and ask the human.
-- **When sources disagree, follow [docs/AUTHORITY-ORDER.md](docs/AUTHORITY-ORDER.md).**
 
 ## Runtime Surfaces
 

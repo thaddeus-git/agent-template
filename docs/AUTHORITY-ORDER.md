@@ -9,14 +9,15 @@
 | 3 | Code (schema + state machine) | `src/` | Machine truth |
 | 4 | Architecture model | `docs/architecture/likec4/` | Structural source of truth (components, boundaries, relationships) |
 | 5 | ADRs | `docs/adr/` | Historical decisions; superseded ADRs are kept for audit but lose authority |
-| 6 | Intake | `docs/intake/` | Captures intent at design time; once built, the artifacts above supersede it |
-| 7 | How-to runbooks | `docs/how-to/` | Operator recipes; may lag code changes |
-| 8 | External-API references | `docs/references/` | Third-party contracts — pinned to the API version in use |
+| 6 | How-to runbooks | `docs/how-to/` | Operator recipes; may lag code changes |
+| 7 | External-API references | `docs/references/` | Third-party contracts — pinned to the API version in use |
 
-> Note on intake's position: an intake is the *seed* for the artifacts
-> above it (ADR + LikeC4 + code). Once those exist, they are canonical
-> and the intake is historical. Don't update an intake to "match" the
-> built result — write a new ADR if the design changes.
+> **Intake is not in the authority order.** An intake (`docs/intake/`)
+> is a design-time seed for the artifacts above. Once the ADR, LikeC4
+> update, and code exist, those are canonical and the intake is
+> historical context — read it for "why was this proposed?" but never
+> as a tiebreaker. If the design needs to change, write a new ADR;
+> don't edit the original intake to match what was built.
 
 ## Resolution protocol
 
