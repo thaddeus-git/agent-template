@@ -16,8 +16,12 @@ mislead.
 
 ## Index
 
-<!-- Add a row when you create a new runbook. -->
-
 | Runbook | Use when |
 |---|---|
-| _example: recover-stuck-lead.md_ | _A lead is stuck in `review` and needs manual intervention._ |
+| – | (no runbooks yet) |
+
+<!--
+Add a row per runbook, e.g.:
+| recover-stuck-lead.md | A lead is stuck in `review` and needs manual intervention. |
+-->
+

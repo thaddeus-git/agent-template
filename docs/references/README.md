@@ -8,8 +8,12 @@ Use [`0000-template.md`](0000-template.md) as the starting point.
 
 ## Index
 
-<!-- Add a row when you pin a new external API. -->
-
 | Reference | What it pins |
 |---|---|
-| _example: example-api-rate-limits.md_ | _Rate limits and 429 retry semantics for Example API._ |
+| – | (no references yet) |
+
+<!--
+Add a row per reference, e.g.:
+| example-api-rate-limits.md | Rate limits and 429 retry semantics for Example API. |
+-->
+

@@ -35,9 +35,9 @@ These are session-critical rules. Violating one breaks the harness contract — 
 - **The LikeC4 model is structural canon — auto-imported every session. Do not autonomously edit it as part of a bug fix.** If a fix requires a model change, stop and ask the human.
 - **When sources disagree, follow [docs/AUTHORITY-ORDER.md](docs/AUTHORITY-ORDER.md).**
 
-### Suggested invariants — replace per project
+### Optional invariants — keep, replace, or delete
 
-The agent-sdr project layers these on top of the universal invariants. Adopt the ones that fit your project's shape; delete or replace the ones that don't.
+These are common shapes worth considering. Adopt the ones that fit; delete or rewrite the rest. The template makes no assumption about which apply.
 
 - **State lives on the row, not the agent.** Workers are stateless; re-derive stage from the row each invocation. *(Applies if you have a pipeline DB.)*
 - **The DB is the only durable pipeline state.** Skill output is transient — the agent must persist after each stage. *(Applies if you have a pipeline DB.)*
@@ -48,6 +48,8 @@ The agent-sdr project layers these on top of the universal invariants. Adopt the
 - **External side-effects are declared in the agent's `side_effects:` frontmatter — never inferred.** Mirrors the LikeC4 `#side-effect-external` tag.
 
 ## Runtime Surfaces
+
+> **None of the `.claude/` directories exist in the empty template** — create them when you add your first agent or skill. The conventions below describe what each should hold once it does exist.
 
 - `.claude/agents/` is the canonical source for repo-defined agent prompts.
 - `.claude/context/` contains runtime reference docs that prompts load inline.
@@ -67,6 +69,8 @@ Structural architecture (components, boundaries, data flow) is the LikeC4 DSL un
 Decision rationale lives in [docs/adr/](docs/adr/).
 
 Before modifying pipeline stages, skill contracts, ownership boundaries, or any external-side-effect behavior: verify alignment with the imported DSL and the relevant ADR. If your change requires the LikeC4 model to change, stop and confirm with the human first.
+
+Run `npx likec4 validate` after editing any `.c4` file and before committing. Treat a validation error as a blocker — fix the model, do not commit broken DSL.
 
 ## Template usage
 
