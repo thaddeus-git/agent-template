@@ -91,10 +91,6 @@ Two principles:
 
 2. **C4 + ADR is a deliberate pair.** C4 says *what the system is*; ADR says *why it's that way*. LikeC4 specifically (over PlantUML, Mermaid, Structurizr, draw.io) because it's typed, the DSL is hierarchical, and it auto-loads into every Claude Code session via `@imports`. Switching DSLs adds friction without adding operator value — see the rationale in your project's first ADR if you want to revisit.
 
-## Suggested first ADR
-
-When you start your project, your first ADR should typically be **`0001-record-architecture-decisions.md`** — the Michael Nygard original. It establishes that you keep ADRs at all. It's three paragraphs, self-justifying, and gives every later ADR something to point at.
-
 ## What this template is NOT
 
 - **Not a runnable agent.** No `package.json`, no `src/`, no agent prompts. Those come from your first intake.
