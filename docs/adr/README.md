@@ -26,8 +26,12 @@ references the old one.
 
 ## Index
 
-<!-- Add a row when you create a new ADR. -->
-
 | # | Title | Status |
 |---|---|---|
-| 0001 | _example: choose SQLite as the pipeline datastore_ | _Proposed_ |
+| – | (no ADRs yet) | – |
+
+<!--
+Add a row per ADR, e.g.:
+| 0001 | Choose SQLite as the pipeline datastore | Accepted |
+-->
+

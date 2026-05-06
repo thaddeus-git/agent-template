@@ -8,6 +8,10 @@ The `.c4` sources here are the **only** persisted form of the model.
 There are no committed rendered diagrams — view them on demand via the
 LikeC4 dev server.
 
+## Prerequisites
+
+The preview and validator require **Node.js 20 or newer**. If `node --version` doesn't print `v20` or higher, install Node from [nodejs.org](https://nodejs.org/) (LTS) before running the commands below.
+
 ## Edit loop
 
 ```bash

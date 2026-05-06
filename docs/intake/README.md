@@ -33,8 +33,14 @@ project.
 
 ## Index
 
-<!-- Add a row when you create a new intake. -->
-
 | # | Title | Status |
 |---|---|---|
-| 0001 | _example: lead scoring_ | _Draft_ |
+| 0001 | [Example — daily digest](0001-example-daily-digest.md) | Example (do not build) |
+
+<!--
+Add a row per real intake, e.g.:
+| 0002 | Lead scoring | Approved |
+
+Delete the example row once your project has its own real intakes.
+-->
+

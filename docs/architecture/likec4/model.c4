@@ -1,18 +1,5 @@
 model {
   // ============================================================
-  // External systems
-  // ============================================================
-  // Add the third-party systems your agent integrates with. Mark every
-  // element that performs irreversible writes (sending email, creating
-  // CRM records, etc.) with #side-effect-external so every edge that
-  // touches it visually flags the risk.
-  //
-  // exampleApi = externalSystem 'Example API' {
-  //   #side-effect-external
-  //   description 'Replace with real description.'
-  // }
-
-  // ============================================================
   // Actors
   // ============================================================
   ops = actor 'Ops operator' { #operator }
@@ -23,37 +10,48 @@ model {
   myAgent = system 'My Agent' {
     description 'Replace with a one-line description of what this agent does.'
 
-    // Datastore — the durable state of the pipeline. Workers are
-    // stateless; the row in the DB is the truth.
-    db = datastore 'Pipeline DB' {
-      description 'SQLite. Source of truth for all pipeline state.'
-    }
-
-    // Operator CLI — humans drive via this surface, never directly
-    // against the datastore.
-    operatorCli = cli 'operator CLI' {
-      #operator
-      description 'Human-driven CLI for inspecting and intervening in the pipeline.'
-
-      operatorCli -> db { 'reads / writes' }
-    }
-
-    // Add your pipeline containers and components here. A starter
-    // pattern looks like:
-    //
-    //   pipeline = container 'Pipeline' {
-    //     coordinator = component 'Coordinator' {
-    //       #manager #serial
-    //       description 'Claims one item from db, dispatches a worker, awaits completion.'
-    //     }
-    //     worker = component 'Worker' {
-    //       #worker
-    //       description 'One row per invocation. Persists result back to db.'
-    //     }
-    //
-    //     coordinator -[dispatches]-> worker
-    //     worker -[reads]-> db
-    //     worker -[writes]-> db
-    //   }
+    // Add containers, components, and a datastore (if needed) here.
+    // Claude will populate this from your first intake — see docs/intake/.
   }
+
+  // ============================================================
+  // Optional starter — pipeline-DB-style agent
+  // ============================================================
+  // If your agent has a SQLite (or similar) pipeline DB, a manager that
+  // claims work, and ephemeral workers, the shape below is a reasonable
+  // starting point. Uncomment and adapt to your domain. If your agent is
+  // stateless (a single skill chain, no DB), delete this block — don't
+  // force a DB into a design that doesn't need one.
+  //
+  //   exampleApi = externalSystem 'Example API' {
+  //     #side-effect-external
+  //     description 'Replace with real description.'
+  //   }
+  //
+  //   extend myAgent {
+  //     db = datastore 'Pipeline DB' {
+  //       description 'Source of truth for all pipeline state.'
+  //     }
+  //
+  //     operatorCli = cli 'operator CLI' {
+  //       #operator
+  //       description 'Human-driven CLI for inspecting and intervening.'
+  //       operatorCli -> db { 'reads / writes' }
+  //     }
+  //
+  //     pipeline = container 'Pipeline' {
+  //       coordinator = component 'Coordinator' {
+  //         #manager #serial
+  //         description 'Claims one item from db, dispatches a worker, awaits completion.'
+  //       }
+  //       worker = component 'Worker' {
+  //         #worker
+  //         description 'One row per invocation. Persists result back to db.'
+  //       }
+  //
+  //       coordinator -[dispatches]-> worker
+  //       worker -[reads]-> db
+  //       worker -[writes]-> db
+  //     }
+  //   }
 }
