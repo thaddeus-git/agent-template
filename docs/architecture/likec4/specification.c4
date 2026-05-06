@@ -1,0 +1,58 @@
+specification {
+  // --- Element kinds ---
+  // Generic starter set. Add or refine to match your domain — but keep
+  // the distinction between components (have side effects) and skills
+  // (pure transforms). That distinction is load-bearing for agent design.
+  element actor          { style { shape person } }
+  element system
+  element container {
+    notation 'Logical grouping inside the system (pipeline / shared core)'
+    style { shape rectangle; color slate }
+  }
+  element datastore      { style { shape storage } }
+  element component      { style { shape rectangle } }
+  element gate {
+    notation 'Fail-closed gate'
+    style { shape rectangle; color amber }
+  }
+  element skill {
+    notation 'Pure-transform skill (no side effects)'
+    style { shape browser; color sky }
+  }
+  element cli {
+    notation 'CLI tool — pipeline-invoked or operator surface'
+    style { shape rectangle; color green }
+  }
+  element blocked {
+    notation 'Blocked / review-needed terminal state'
+    style { shape rectangle; color red }
+  }
+  element externalSystem { style { color muted } }
+
+  // --- Relationship kinds ---
+  // Visual convention:
+  //   dispatches → bold solid (orchestrator hands a unit of work to a worker)
+  //   calls      → dotted    (synchronous skill / sub-call)
+  //   reads      → dashed    (read access to a datastore)
+  //   writes     → solid     (write access to a datastore)
+  //   handshake  → dashed amber (cross-component handshake via DB flag)
+  relationship dispatches { color primary; line solid; head normal }
+  relationship calls      { color secondary; line dotted; head normal }
+  relationship reads      { color muted; line dashed; head vee }
+  relationship writes     { color muted; line solid;  head vee }
+  relationship handshake  { color amber; line dashed; head normal }
+
+  // --- Tags ---
+  // Role
+  tag manager      // long-running coordinator process
+  tag worker       // ephemeral worker (Claude agent or CLI invocation)
+  tag operator     // human-driven CLI surface
+
+  // Safety / observability surface
+  tag side-effect-external  // edge or element causes irreversible writes to a real third party (mailbox, CRM, customer-facing sheet)
+  tag future                // documented for design intent; not implemented in code yet
+
+  // Coordinator concurrency mode (applies only to #manager elements).
+  tag serial       // claims one work item, dispatches, awaits completion, repeats — strictly sequential
+  tag concurrent   // claims a batch atomically and dispatches N workers in parallel
+}

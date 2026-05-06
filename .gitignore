@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Claude Code local overrides (gitignored — copy from settings.local.json.example if added later)
+.claude/settings.local.json
+
+# Node / JS (when you add a runtime stack)
+node_modules/
+dist/
+*.tsbuildinfo
+.env
+.env.local
+
+# Local DB / cache
+*.db
+*.db-journal
+.cache/

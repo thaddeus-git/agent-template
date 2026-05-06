@@ -1,0 +1,44 @@
+views {
+  // ============================================================
+  // Top-level — the C1 / System Context view
+  // ============================================================
+  // ONE diagram showing the whole system in its environment. The
+  // audience is a newcomer who needs the 30-second tour. Don't split
+  // this by pipeline — that's what C2 (container) views are for.
+  view index {
+    title 'System Context'
+    autoLayout TopBottom
+    include *
+  }
+
+  // ============================================================
+  // C2 / Container views
+  // ============================================================
+  // One per pipeline or major boundary. Each view shows only the
+  // containers and external integrations relevant to that pipeline.
+  // Use `exclude` to hide cross-boundary peers.
+  //
+  //   view pipeline of myAgent.pipeline {
+  //     title 'Pipeline — Container View'
+  //     autoLayout TopBottom 120 80
+  //     include *
+  //     include myAgent.db
+  //     // Add only the externals this pipeline integrates with.
+  //   }
+
+  // ============================================================
+  // Dynamic / flow views
+  // ============================================================
+  // Add ONLY when needed to answer a question existing views can't.
+  // Each view has ongoing maintenance cost — when the model evolves,
+  // every existing view either tracks the change or rots.
+  //
+  // Don't add:
+  //   - Swim-lane diagrams (only earn their keep when accountability
+  //     is genuinely split between multiple actors).
+  //   - 1:1 mirror views of agents (the agent's .md prompt is canon).
+  //   - Per-state-machine views beyond one canonical lifecycle view.
+  //
+  // When you genuinely need a new view, write an ADR first explaining
+  // what question the view answers that existing views can't.
+}
