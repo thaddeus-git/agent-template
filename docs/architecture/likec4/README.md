@@ -14,13 +14,37 @@ The preview and validator require **Node.js 20 or newer**. If `node --version` d
 
 ## Edit loop
 
+If your project has the `arch:*` scripts wired up (see [Project script convention](#project-script-convention) below):
+
 ```bash
-npx likec4 preview     # live preview in browser, auto-reloads on save
-npx likec4 validate    # validate DSL before commit
+npm run arch:preview     # live preview in browser, hot-reloads on save
+npm run arch:validate    # validate DSL before commit
+```
+
+Or call LikeC4 directly:
+
+```bash
+npx likec4 dev           # same as arch:preview
+npx likec4 validate      # same as arch:validate
 ```
 
 Edit the `.c4` files; refresh the browser. Stop the server with Ctrl-C
 when done.
+
+## Project script convention
+
+Per the [team playbook section 5.1](../../playbook/PLAYBOOK.md#51-structural-diagrams--likec4), every project with LikeC4 should expose these npm scripts so daily commands are short and identical across projects:
+
+```json
+{
+  "scripts": {
+    "arch:preview": "likec4 dev",
+    "arch:validate": "likec4 validate",
+    "arch:export-png": "likec4 export png -o docs/architecture/likec4/exports"
+  },
+  "devDependencies": { "likec4": "^1" }
+}
+```
 
 ## File map
 
