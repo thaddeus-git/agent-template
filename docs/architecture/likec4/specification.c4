@@ -4,6 +4,10 @@ specification {
   // the distinction between components (have side effects) and skills
   // (pure transforms). That distinction is load-bearing for agent design.
   element actor          { style { shape person } }
+  element agent {
+    notation 'LLM-driven worker (forked context, scoped tools)'
+    style { shape person; color sky }
+  }
   element system
   element container {
     notation 'Logical grouping inside the system (pipeline / shared core)'
