@@ -73,7 +73,7 @@ These rules keep the model load-bearing.
 | Kind | Use for | Don't use for |
 |---|---|---|
 | `actor` | Humans (ops, sales). Always interacts with the system or a CLI, never with a datastore directly. | Background jobs (those are `component`s). |
-| `agent` | LLM-driven worker inside the system — forked context, scoped tools, has judgment. | Deterministic processes (those are `component`s). |
+| `agent` | LLM-driven worker inside the system — forked context, scoped tools, has judgment **in the orchestration loop** (decides what to do next). | Deterministic orchestration (those are `component`s or `cli`s). **Apply the playbook [§1.1 workflow-vs-agent test](../../playbook/PLAYBOOK.md#11-simplicity-first) before using this kind** — most things are workflows, not agents. |
 | `system` | The single boundary around your agent. | Sub-systems. |
 | `container` | A logical grouping inside the system (a pipeline, a shared core). | Anything with behavior — behavior lives in `component`s. |
 | `component` | A long-running process (manager) or an ephemeral worker (Claude agent / CLI invocation). Components may have side effects. | Pure transforms (those are `skill`s). |
