@@ -12,6 +12,7 @@ Designed for non-technical operators who use Claude Code as their primary builde
 ├── docs/
 │   ├── README.md                   # doc map — start here
 │   ├── AUTHORITY-ORDER.md          # which doc wins when sources disagree
+│   ├── cli-tools.md                # index of every CLI + its side-effect class
 │   ├── intake/                     # plain-English intake forms (you fill in)
 │   ├── architecture/likec4/        # C4 structural model (Claude maintains)
 │   ├── adr/                        # decision records, MADR format
