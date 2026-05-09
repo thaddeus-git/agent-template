@@ -35,13 +35,24 @@ git remote set-url origin <your-new-repo-url>
 
 Or use GitHub's "Use this template" button after marking the repo as a template in Settings → Template repository.
 
-### 2. Replace the template-specific bits
+### 2. Add the playbook as a submodule
+
+The template's `CLAUDE.md` `@imports` `docs/playbook/PLAYBOOK.md`. The playbook is the team's agent-building method (canonical rules; this template only extends it with project-specific bits).
+
+```bash
+git submodule add git@github.com:thaddeus-git/agent-playbook.git docs/playbook
+git commit -m "Add agent-playbook submodule"
+```
+
+If you don't want the playbook (e.g., you're forking outside the team), remove the `@docs/playbook/PLAYBOOK.md` line from `CLAUDE.md`.
+
+### 3. Replace the template-specific bits
 
 - Edit `CLAUDE.md` — replace the *Template usage* section with project-specific guidance.
 - Edit `docs/architecture/likec4/model.c4` — replace the placeholder with your actual system, containers, and external integrations.
 - Update this `README.md` to describe your project, not the template.
 
-### 3. Write your first intake
+### 4. Write your first intake
 
 ```bash
 cp docs/intake/0000-template.md docs/intake/0001-<your-first-feature>.md
@@ -54,7 +65,7 @@ Fill in sections 1–4 in plain English:
 3. **Happy path vs failure paths** — for each step: success + ≥2 failure modes.
 4. **Open questions for Claude** — things you don't know how to decide.
 
-### 4. Hand it to Claude
+### 5. Hand it to Claude
 
 > *"build this from the intake at `docs/intake/0001-<feature>.md`."*
 
@@ -65,7 +76,7 @@ Claude will:
 3. Update **LikeC4** (`docs/architecture/likec4/model.c4` + a view).
 4. Write the agent prompt / skill / code (`.claude/agents/`, `.claude/skills/`, `src/`).
 
-### 5. Review what you can verify
+### 6. Review what you can verify
 
 - **You** read the intake and the ADR. These are operator-level artifacts.
 - **Claude** maintains the LikeC4 DSL and the code. You read the rendered diagram, not the DSL source.
