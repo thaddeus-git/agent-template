@@ -4,13 +4,21 @@ A starter template for building Claude Code agents using **C4 + ADR + plain-Engl
 
 Designed for non-technical operators who use Claude Code as their primary builder. The artifacts you (the operator) read and approve are intentionally separated from the artifacts Claude maintains underneath.
 
+## Daily operator? Start here
+
+Read **[QUICKSTART.md](QUICKSTART.md)** — 1 page, 7 steps. Tells you exactly what to do day-to-day. You don't need anything else from this README.
+
+The rest of this README is for the person setting up a new project from this template.
+
 ## What's in the box
 
 ```
 .
+├── QUICKSTART.md                   # 1-page daily workflow — operator reads this
+├── bootstrap.sh                    # one-time setup script for a forked project
 ├── CLAUDE.md                       # session-loaded guidance for Claude Code
 ├── docs/
-│   ├── README.md                   # doc map — start here
+│   ├── README.md                   # doc map
 │   ├── AUTHORITY-ORDER.md          # which doc wins when sources disagree
 │   ├── cli-tools.md                # index of every CLI + its side-effect class
 │   ├── intake/                     # plain-English intake forms (you fill in)
@@ -36,13 +44,14 @@ git remote set-url origin <your-new-repo-url>
 
 Or use GitHub's "Use this template" button after marking the repo as a template in Settings → Template repository.
 
-### 2. Add the playbook as a submodule
+### 2. Add the playbook as a submodule + bootstrap
 
 The template's `CLAUDE.md` `@imports` `docs/playbook/PLAYBOOK.md`. The playbook is the team's agent-building method (canonical rules; this template only extends it with project-specific bits).
 
 ```bash
 git submodule add git@github.com:thaddeus-git/agent-playbook.git docs/playbook
 git commit -m "Add agent-playbook submodule"
+./bootstrap.sh                # pulls submodules, installs npm deps if package.json exists
 ```
 
 If you don't want the playbook (e.g., you're forking outside the team), remove the `@docs/playbook/PLAYBOOK.md` line from `CLAUDE.md`.
