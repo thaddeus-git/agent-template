@@ -5,6 +5,10 @@
 
 # Claude Code local overrides (gitignored — copy from settings.local.json.example if added later)
 .claude/settings.local.json
+.claude/worktrees/
+
+# Builder-mode context — local only, created from CLAUDE.local.md.example by bootstrap.sh
+CLAUDE.local.md
 
 # Node / JS (when you add a runtime stack)
 node_modules/
