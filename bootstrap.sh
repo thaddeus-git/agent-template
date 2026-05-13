@@ -44,6 +44,17 @@ else
   echo "ℹ No package.json found; skipping npm install."
 fi
 
+# --- Builder-mode context (CLAUDE.local.md) ---
+
+if [ -f CLAUDE.local.md ]; then
+  echo "ℹ CLAUDE.local.md already exists; not overwriting."
+elif [ -f CLAUDE.local.md.example ]; then
+  echo "→ Creating CLAUDE.local.md from CLAUDE.local.md.example (builder-mode context — gitignored)."
+  cp CLAUDE.local.md.example CLAUDE.local.md
+else
+  echo "ℹ No CLAUDE.local.md.example found; skipping local-context bootstrap."
+fi
+
 # --- Done ---
 
 echo ""

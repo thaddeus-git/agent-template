@@ -16,7 +16,8 @@ The rest of this README is for the person setting up a new project from this tem
 .
 ├── QUICKSTART.md                   # 1-page daily workflow — operator reads this
 ├── bootstrap.sh                    # one-time setup script for a forked project
-├── CLAUDE.md                       # session-loaded guidance for Claude Code
+├── CLAUDE.md                       # runtime context — what agents see, committed
+├── CLAUDE.local.md.example         # builder context template — copied to CLAUDE.local.md by bootstrap.sh
 ├── docs/
 │   ├── README.md                   # doc map
 │   ├── AUTHORITY-ORDER.md          # which doc wins when sources disagree
@@ -28,6 +29,17 @@ The rest of this README is for the person setting up a new project from this tem
 │   └── references/                 # pinned external API behavior
 └── README.md                       # this file
 ```
+
+## Builder vs runtime — the CLAUDE.local.md pattern
+
+This template splits Claude Code's loaded context into two files:
+
+- **`CLAUDE.md`** — runtime context. Project description, runtime invariants, file layout. **Committed.** Loaded for everyone (subagents, teammates, anyone who clones).
+- **`CLAUDE.local.md`** — builder context. Playbook import, LikeC4 structural model, decision history, builder invariants. **Gitignored.** Only loaded for you (and others who run `./bootstrap.sh`).
+
+The split keeps the agent-building method (the playbook) out of the context window when an agent is doing runtime work, while keeping it auto-loaded when you're designing the agent.
+
+`bootstrap.sh` creates `CLAUDE.local.md` from `CLAUDE.local.md.example` on first run. The `.example` file is committed so the pattern survives forks; the actual `CLAUDE.local.md` you customise is yours alone.
 
 There is no `src/`, no `.claude/agents/`, no `package.json` yet. Those are added when you start building. The template is the **scaffolding for thinking**, not a runnable system.
 

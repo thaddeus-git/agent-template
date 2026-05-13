@@ -1,58 +1,37 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code when working with this repository.
+This file is **runtime-mode guidance** for Claude Code. It's what agents (subagents in `.claude/agents/`, skills in `.claude/skills/`) and runtime Claude Code sessions see. It's committed and shared with anyone who clones the repo.
 
-## Method
+> **Builder-mode context** — the agent-building playbook, LikeC4 structural model imports, decision history — lives in **[`CLAUDE.local.md`](CLAUDE.local.md.example)**. That file is gitignored. Run `./bootstrap.sh` to create it from the example.
 
-The team's agent-building method lives in the playbook below. Read it first; the rules in this file *extend* it with project-specific conventions, never duplicate it.
+## Project Invariants (runtime)
 
-@docs/playbook/PLAYBOOK.md
+Rules an agent has to honour while doing work. Violating one means an agent stepped outside designed behavior.
 
-## Project Invariants
+- **When docs disagree, follow [docs/AUTHORITY-ORDER.md](docs/AUTHORITY-ORDER.md).**
 
-These are session-critical rules. Violating one breaks the harness contract — fix the violation, do not weaken the rule.
+> *Add runtime-relevant project invariants here as they emerge. Each needs a **why** so future sessions can judge edge cases. Example shape: "All email sends go through `bin/send.sh` so retries are centralised. Why: prior incident where two skills retried independently and double-sent."*
 
-- **The LikeC4 model is structural canon — auto-imported every session. Do not autonomously edit it as part of a bug fix.** If a fix requires a model change, stop and ask the operator.
-- **When sources disagree, follow [docs/AUTHORITY-ORDER.md](docs/AUTHORITY-ORDER.md).**
+## Project Layout
 
-> *Add project-specific invariants here as they emerge. Each one needs a **why** so future sessions can judge edge cases. Example shape: "All email sends go through `bin/send.sh` so retries are centralised. Why: prior incident where two skills retried independently and double-sent."*
-
-## Runtime Surfaces
-
-> **None of the `.claude/` directories exist in the empty template.** Create them when you add your first agent or skill.
+Filesystem conventions agents and CLIs depend on. Create these directories when you add your first agent or skill.
 
 - `.claude/agents/` — repo-defined subagent prompts
 - `.claude/skills/` — skills (canonical surface and runtime)
-- `.claude/context/` — runtime reference docs prompts load inline
+- `.claude/context/` — runtime reference docs that prompts load inline
 - `bin/` or `scripts/` — CLI tools (deterministic, no LLM call)
 
 At runtime, invoke skills directly via `Skill(...)` instead of searching for `SKILL.md` files.
 
-## Architecture
+## Project
 
-The structural model is auto-loaded into every session via the `@imports` below. This is authoritative for components, boundaries, and ownership. Run `npx likec4 validate` after editing any `.c4` file and before committing.
-
-@docs/architecture/likec4/specification.c4
-@docs/architecture/likec4/model.c4
-@docs/architecture/likec4/views.c4
-
-If your change requires the LikeC4 model to change, stop and confirm with the operator first.
-
-Decision rationale lives in [docs/adr/](docs/adr/).
-
-## Template usage
-
-> *Replace this section with project-specific guidance once you've forked the template.*
+> *Replace this section with project-specific runtime context once you've forked the template: a one-paragraph description of what this system does, the key entities agents work with, and the external integrations they call.*
 
 After cloning:
 
-1. **Add the playbook as a submodule** (if not already done):
-   ```bash
-   git submodule add git@github.com:thaddeus-git/agent-playbook.git docs/playbook
-   ```
-2. Replace this section with project-specific overview, key entities, and external integrations.
-3. Fill `docs/architecture/likec4/model.c4` with your actual system.
-4. Write `docs/intake/0001-<first-feature>.md` for the first thing you want to build.
-5. Hand it to Claude.
+1. Run `./bootstrap.sh` — pulls submodules, installs npm deps, creates your local `CLAUDE.local.md` from the example
+2. Replace this section with runtime-facing project description
+3. Edit `CLAUDE.local.md` for your builder context (it auto-imports the playbook)
+4. Read [QUICKSTART.md](QUICKSTART.md) for the 7-step daily workflow
 
 See [README.md](README.md) for the full template usage guide.

@@ -1,0 +1,35 @@
+# CLAUDE.local.md
+
+> **Builder-mode context.** Loaded into Claude Code sessions on **your machine only** (gitignored). Anyone who clones this repo without running `./bootstrap.sh` will not see this content. That isolation is intentional: builders see the playbook and architecture history; subagents at runtime do not.
+>
+> If you didn't intend to be in builder mode (e.g. you're a teammate who just wants to run an agent), delete this file or rename it.
+
+## Method
+
+The team's agent-building method lives in the playbook below. Read it first; the rules in `CLAUDE.md` and this file *extend* it with project-specific conventions, never duplicate it.
+
+@docs/playbook/PLAYBOOK.md
+
+## Builder Invariants
+
+- **The LikeC4 model is structural canon — auto-imported every session.** Do not autonomously edit it as part of a bug fix. If a fix requires a model change, stop and ask the operator.
+
+> *Add project-specific builder invariants here. Things like: which tests are mandatory before committing, which files require ADRs to change, which CLIs must stay backward-compatible.*
+
+## Architecture (LikeC4)
+
+The structural model is auto-loaded into every builder session via the `@imports` below. This is authoritative for components, boundaries, and ownership. Run `npx likec4 validate` after editing any `.c4` file and before committing.
+
+@docs/architecture/likec4/specification.c4
+@docs/architecture/likec4/model.c4
+@docs/architecture/likec4/views.c4
+
+If your change requires the LikeC4 model to change, stop and confirm with the operator first.
+
+Decision rationale lives in [docs/adr/](docs/adr/).
+
+## Decision log (high-level)
+
+> *One-line summaries of accepted ADRs for quick scan. Detailed ADRs live in [docs/adr/](docs/adr/).*
+
+(Empty until first ADR lands.)
